@@ -56,12 +56,14 @@ async function loadBar() {
 
     g.selectAll(".bar").data(finalData).enter().append("rect").attr('fill', function(d,i) { return color(i)}).attr("class", "bar").attr("x", function(d) { return x(d.state); }).attr("y", function(d) { return y((d.value)); }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y((d.value)); })
     
-    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+120).attr("y", 110).text(Math.round(illinois_average));
-    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+220).attr("y", 150).text(Math.round(texas_average));
-    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+318).attr("y", 175).text(Math.round(arkansas_average));
-    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+412).attr("y", 210).text(Math.round(california_average));
-    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+505).attr("y", 100).text(Math.round(florida_average));
-    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+605).attr("y", 250).text(Math.round(newyork_average));
+    //annotations
+
+    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+120).attr("y", 370).text(Math.round(illinois_average));
+    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+220).attr("y", 415).text(Math.round(texas_average));
+    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+318).attr("y", 450).text(Math.round(arkansas_average));
+    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+412).attr("y", 240).text(Math.round(california_average));
+    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+505).attr("y", 270).text(Math.round(florida_average));
+    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+605).attr("y", 95).text(Math.round(newyork_average));
 
     g.append("text").attr("text-anchor", "end").attr("x", width/2).attr("y", height + 50).text("State");
     g.append("text").attr("text-anchor", "end").attr("transform", "rotate(-90)").attr("y", -50).attr("x", -200).text("Average # of abortions")
@@ -98,7 +100,7 @@ async function loadPie() {
 
         g.append("text")
         .attr("class", "name-text")
-        .text(`${d.data.year} (${d.data.value}) (${(Math.round(1000 * d.data.value) / 200) + '%'})`)
+        .text(`${d.data.state} (${d.data.value})`)
         .attr('text-anchor', 'middle');
       })
     .on("mousemove", function(d) {
