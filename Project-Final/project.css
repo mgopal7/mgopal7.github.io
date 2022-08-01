@@ -1,0 +1,51 @@
+
+.button-group{
+    display: inline-flex
+}
+.buttons {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 20px;
+  }
+  .buttons {
+    margin-right: 50px;
+    transition-duration: 0.2s;
+    border-radius: 2px;
+  }
+  .buttons:hover {
+    background-color: black;
+    color: white;
+  }
+  body {
+    background-color: white;
+    text-align: center;
+    font: "Brush Script MT";
+  }
+  .legend {
+    float: left;
+    font-family: "Verdana";
+    font-size: .7em;
+  }
+  .pie {
+    margin: 20px;
+  }
+  .pie text {
+    font-family: "Times New Roman";
+    fill: #000;
+  }
+  svg {
+      float: left;
+  }
+
+  
+
+
+
+  
+
+
+
+
