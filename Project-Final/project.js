@@ -1,5 +1,5 @@
 async function loadBar() {
-    const data = await d3.csv('dataset.csv');
+    const data = await d3.csv('https://mgopal7.github.io/Project-Final/dataset.csv');
 
     const illinois_data = data.filter(function (d) {
         return d.state == 'IL'});
@@ -69,7 +69,7 @@ async function loadBar() {
 
 
 async function loadScatter() {
-    const csvData = await d3.csv('dataset.csv');
+    const csvData = await d3.csv('https://mgopal7.github.io/Project-Final/dataset.csv');
     var data = [{state: "Texas", value: 5406},{state: "Arkansas", value: 20423},{state: "California", value: 120000},{state: "New York", value: 513},{state: "Florida", value: 106},{state: "Illinois", value: 160942}]
 
     var width = 1000, height = 1000, opacity = 1, hoverOpacity = 0.50, other = 1, tooltipSize = 15, piechart = "#four";
@@ -145,7 +145,7 @@ let keys = legend.selectAll('.key')
 }
 
 async function loadPie() {
-    const data = await d3.csv('dataset.csv');
+    const data = await d3.csv('https://mgopal7.github.io/Project-Final/dataset.csv');
 
     console.log(data)
 
