@@ -56,19 +56,19 @@ async function loadBar() {
 
     g.selectAll(".bar").data(finalData).enter().append("rect").attr('fill', function(d,i) { return color(i)}).attr("class", "bar").attr("x", function(d) { return x(d.state); }).attr("y", function(d) { return y((d.value)); }).attr("width", x.bandwidth()).attr("height", function(d) { return height - y((d.value)); })
     
-    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+120).attr("y", 110).text(Math.round(illinois_average));
-    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+220).attr("y", 150).text(Math.round(texas_average));
-    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+318).attr("y", 175).text(Math.round(arkansas_average));
-    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+412).attr("y", 210).text(Math.round(california_average));
-    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+505).attr("y", 100).text(Math.round(florida_average));
-    svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+605).attr("y", 250).text(Math.round(newyork_average));
+    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+120).attr("y", 110).text(Math.round(illinois_average));
+    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+220).attr("y", 150).text(Math.round(texas_average));
+    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+318).attr("y", 175).text(Math.round(arkansas_average));
+    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+412).attr("y", 210).text(Math.round(california_average));
+    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+505).attr("y", 100).text(Math.round(florida_average));
+    // svg.append("text").attr("text-anchor", "middle").attr("x", x.bandwidth()/2+605).attr("y", 250).text(Math.round(newyork_average));
 
     g.append("text").attr("text-anchor", "end").attr("x", width/2).attr("y", height + 50).text("State");
     g.append("text").attr("text-anchor", "end").attr("transform", "rotate(-90)").attr("y", -50).attr("x", -200).text("Average # of abortions")
 }
 
 
-async function loadScatter() {
+async function loadPie() {
     const csvData = await d3.csv('https://mgopal7.github.io/Project-Final/dataset.csv');
     var data = [{state: "Texas", value: 5406},{state: "Arkansas", value: 20423},{state: "California", value: 120000},{state: "New York", value: 513},{state: "Florida", value: 106},{state: "Illinois", value: 160942}]
 
@@ -98,7 +98,7 @@ async function loadScatter() {
 
         g.append("text")
         .attr("class", "name-text")
-        .text(`${d.data.state} (${d.data.value}) (${(Math.round(1000 * d.data.value)) + '%'})`)
+        .text(`${d.data.year} (${d.data.value}) (${(Math.round(1000 * d.data.value) / 200) + '%'})`)
         .attr('text-anchor', 'middle');
       })
     .on("mousemove", function(d) {
@@ -138,16 +138,16 @@ let keys = legend.selectAll('.key')
       .style('background-color', (d, i) => color(i));
 
     keys.append('div')
-      .attr('class', 'state')
+      .attr('class', 'year')
       .text(d => `${d.state}`);
 
     keys.exit().remove();
 }
 
-async function loadPie() {
+async function loadScatter() {
     const data = await d3.csv('https://mgopal7.github.io/Project-Final/dataset.csv');
 
-    console.log(data)
+    // console.log(data)
 
     const states = ["TX", "IL", "AK", "CA","NY","FL"]
 
@@ -170,14 +170,14 @@ async function loadPie() {
 
     var svg = d3.select("#five").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
-    var x = d3.scaleLinear().domain([0, d3.max(data, function(d) { return d.abortionrate2529; })]).range([ 0, width ]);
-    svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(7));
+    var x = d3.scaleLinear().domain([0, d3.max(data, function(d) { return d.year; })]).range([ 0, width ]);
+    svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).ticks(6));
     
-    var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return d.birthrate1519; })]).range([ height, 0 ]);
+    var y = d3.scaleLinear().domain([0, d3.max(data, function(d) { return d.pregnancies2529; })]).range([ height, 0 ]);
     svg.append("g").call(d3.axisLeft(y));
 
-    svg.selectAll("circle").data(data.filter(function(d){return d.state=="TX"})).enter().append("circle").attr("cx", function(d) { return x(d.AgeatArrest)}).attr("cy", function(d) { return y(d.birthrate1519)}).attr("r", 3).attr("fill", "navy")
+    svg.selectAll("circle").data(data.filter(function(d){return d.year})).enter().append("circle").attr("cx", function(d) { return x(d.year)}).attr("cy", function(d) { return y(d.pregnancies2024)}).attr("r", 3).attr("fill", "red")
 
-    svg.append("text").attr("text-anchor", "end").attr("x", width/2).attr("y", height + margin.top + 18).text("State");
+    svg.append("text").attr("text-anchor", "end").attr("x", width/2).attr("y", height + margin.top + 18).text("Year");
     svg.append("text").attr("text-anchor", "end").attr("transform", "rotate(-90)").attr("y", -margin.left+20).attr("x", -250).text("Number of abortions")
 }
